@@ -1,55 +1,49 @@
 # ClickableSprite.gd
 extends Sprite2D
 
-@export var wobble_strength : float = 0.2
+@export var wobble_strength : float = 0.05
 @export var wobble_duration : float = 0.4
 @export var coin_per_click : int = 1
 
+@onready var base_scale : Vector2 = Vector2(0.297, 0.297)
+
 func _input(event: InputEvent) -> void:
-	# Cek klik kiri mouse
+	# Mendeteksi klik mouse kiri tepat di dalam area gambar sprite kucing
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		# Cek apakah klik berada di dalam area gambar Sprite
 		if get_rect().has_point(to_local(event.position)):
 			trigger_click_effect(event.position)
 
 func trigger_click_effect(click_pos: Vector2) -> void:
-
+	# Menambahkan koin ke global data dan menjalankan animasi membal (wobble) pada sprite
 	globalvar.add_coins(coin_per_click)
 	
-	# 2. Efek Wobble pada Sprite
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_ELASTIC)
-	tween.set_ease(Tween.EASE_OUT)
+	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	var target_squash = Vector2(base_scale.x + wobble_strength, base_scale.y - wobble_strength)
 	
-	# Gepengkan sedikit (Squash and Stretch)
-	var target_squash = Vector2(1.0 + wobble_strength, 1.0 - wobble_strength)
 	tween.tween_property(self, "scale", target_squash, wobble_duration * 0.2)
-	# Kembalikan ke skala semula (1, 1) dengan efek membal
-	tween.tween_property(self, "scale", Vector2.ONE, wobble_duration * 0.8)
+	tween.tween_property(self, "scale", base_scale, wobble_duration * 0.8)
 	
-	# 3. Munculkan teks "+1" melayang di posisi mouse
 	spawn_floating_text(click_pos)
 
 func spawn_floating_text(pos: Vector2) -> void:
-	# Membuat node Label baru secara dinamis lewat kode
+	# Membuat teks angka melayang dan memaksanya berada di lapisan paling depan di dalam hierarki UI
 	var label = Label.new()
 	label.text = "+" + str(coin_per_click)
-	label.position = pos - Vector2(20, 20) # Sedikit penyesuaian posisi agar pas di tengah mouse
+	label.z_index = 100
+	label.add_theme_color_override("font_color", Color.BLACK)
 	
-	# Mengatur font/warna teks lewat kode (opsional, bisa dikustomisasi)
-	label.add_theme_color_override("font_color", Color.YELLOW)
+	var ui_layer = get_tree().current_scene.get_node_or_null("UI")
+	if ui_layer:
+		ui_layer.add_child(label)
+		ui_layer.move_child(label, -1) # BUG FIX: Memaksa label pindah ke urutan paling bawah (paling depan di layar) di dalam UI
+		label.global_position = pos - Vector2(10, 15)
+	else:
+		get_tree().current_scene.add_child(label)
+		label.position = pos - Vector2(20, 20)
 	
-	# Masukkan label ke dalam scene tree utama agar terlihat di layar
-	get_tree().current_scene.add_child(label)
+	var lifetime: float = 2.0
+	var text_tween = create_tween().set_parallel(true)
 	
-	# Animasi teks melayang ke atas lalu menghilang
-	var text_tween = create_tween()
-	text_tween.set_parallel(true) # Membuat animasi jalan barengan
-	
-	# Terbang ke atas (mengurangi koordinat Y)
-	text_tween.tween_property(label, "position:y", label.position.y - 80, 0.6).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	# Efek memudar (mengubah modulasi opacity/alpha menjadi 0)
-	text_tween.tween_property(label, "modulate:a", 0.0, 0.6)
-	
-	# Hapus node label dari memori jika animasi sudah selesai agar tidak menumpuk (anti-lag)
+	text_tween.tween_property(label, "position:y", label.position.y - 150, lifetime).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	text_tween.tween_property(label, "modulate:a", 0.0, lifetime)
 	text_tween.chain().tween_callback(label.queue_free)
