@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="untitled-game-amazing"
+config/name="verybad cat clicker game"
 run/main_scene="uid://b2h6oufblx7c0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+globalvar="*uid://b8vl62g1yfcji"
 
 [editor_plugins]
 

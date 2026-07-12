@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b2h6oufblx7c0"]
+
+[ext_resource type="Texture2D" uid="uid://b15saqjoe26x7" path="res://game/assets/cat.jpg" id="1_6ulah"]
+[ext_resource type="Script" uid="uid://x07ffewo8ufw" path="res://game/scripts/box.gd" id="2_faepb"]
+[ext_resource type="Script" uid="uid://h01w5gpvfxpq" path="res://game/scripts/coinstxt.gd" id="3_faepb"]
+
+[node name="Control" type="Control" unique_id=541285444]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1307716653]
+position = Vector2(585, 302.9999)
+scale = Vector2(0.525, 0.525)
+texture = ExtResource("1_6ulah")
+script = ExtResource("2_faepb")
+
+[node name="CoinsTXT" type="Label" parent="." unique_id=935672379]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 32.0
+offset_right = 147.0
+offset_bottom = 55.0
+text = "Coins: 0"
+script = ExtResource("3_faepb")
