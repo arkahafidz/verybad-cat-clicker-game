@@ -5,8 +5,8 @@ func _process(_delta: float) -> void:
 
 
 func _on_home_ui_pressed() -> void:
-	pass # Replace with function body.
+	pass
 
 
 func _on_upg_ui_pressed() -> void:
-	pass # Replace with function body.
+	pass

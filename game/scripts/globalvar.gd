@@ -8,5 +8,4 @@ var upgcost1: int = 50
 var upgcost2: int = 100
 
 func add_coins(amount: int) -> void:
-	# Menambahkan koin global berdasarkan parameter nilai yang masuk
 	coins += amount
