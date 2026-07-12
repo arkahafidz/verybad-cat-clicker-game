@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbh3lblfe8mvk"
-path="res://.godot/imported/upgui.jpg-24e478daf4dcdba7ece86cf41ed1a722.ctex"
+uid="uid://cvg1d87p4ii36"
+path="res://.godot/imported/upg.png-eee5a2c8b9be408271f30945ede753da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/upgui.jpg"
-dest_files=["res://.godot/imported/upgui.jpg-24e478daf4dcdba7ece86cf41ed1a722.ctex"]
+source_file="res://game/assets/upg.png"
+dest_files=["res://.godot/imported/upg.png-eee5a2c8b9be408271f30945ede753da.ctex"]
 
 [params]
 
