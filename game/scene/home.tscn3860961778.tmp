@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://b2h6oufblx7c0"]
+
+[ext_resource type="Texture2D" uid="uid://cctadf2x8c65" path="res://game/assets/cat.png" id="1_lqsbn"]
+[ext_resource type="Script" uid="uid://cgkc682yne3a4" path="res://game/scripts/controlspage.gd" id="1_npk3y"]
+[ext_resource type="Script" uid="uid://x07ffewo8ufw" path="res://game/scripts/cat.gd" id="2_faepb"]
+[ext_resource type="Script" uid="uid://b2lm0c110stht" path="res://game/scripts/upg.gd" id="3_cpvns"]
+[ext_resource type="Script" uid="uid://h01w5gpvfxpq" path="res://game/scripts/coinstxt.gd" id="3_faepb"]
+[ext_resource type="FontFile" uid="uid://c0r184kruwoef" path="res://game/assets/GochiHand-Regular.ttf" id="3_xrhnn"]
+[ext_resource type="Script" uid="uid://ch2qj508t1o5y" path="res://game/scripts/frendytxt.gd" id="5_lqsbn"]
+[ext_resource type="Texture2D" uid="uid://cnxrvx83db8wk" path="res://game/assets/buy.png" id="5_yo8w2"]
+[ext_resource type="Texture2D" uid="uid://c7nep825rbohr" path="res://game/assets/home.png" id="7_cpvns"]
+[ext_resource type="Texture2D" uid="uid://cvg1d87p4ii36" path="res://game/assets/upg.png" id="8_npk3y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lqsbn"]
+font = ExtResource("3_xrhnn")
+font_size = 38
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrhnn"]
+font = ExtResource("3_xrhnn")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[node name="Game" type="Control" unique_id=541285444]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=728305795]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Pages" type="Control" parent="." unique_id=573629557]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_npk3y")
+
+[node name="home" type="Control" parent="Pages" unique_id=1910223667]
+anchors_preset = 0
+offset_left = 73.0
+offset_top = 44.0
+offset_right = 144.0
+offset_bottom = 84.0
+
+[node name="Cat" type="Sprite2D" parent="Pages/home" unique_id=839551631]
+position = Vector2(575, 321)
+scale = Vector2(0.60625, 0.60625)
+texture = ExtResource("1_lqsbn")
+script = ExtResource("2_faepb")
+metadata/_edit_group_ = true
+
+[node name="upg" type="Control" parent="Pages" unique_id=2104804254]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_cpvns")
+
+[node name="Upgrade1TXT" type="Label" parent="Pages/upg" unique_id=424802027]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 141.0
+offset_right = 180.0
+offset_bottom = 187.0
+text = "Coins: 0"
+label_settings = SubResource("LabelSettings_lqsbn")
+
+[node name="Upgrade2TXT" type="Label" parent="Pages/upg" unique_id=1128127562]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 237.0
+offset_right = 180.0
+offset_bottom = 283.0
+text = "Coins: 0"
+label_settings = SubResource("LabelSettings_lqsbn")
+
+[node name="Buy1" type="Button" parent="Pages/upg" unique_id=2004279562]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 125.0
+offset_right = 1240.0
+offset_bottom = 933.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("5_yo8w2")
+
+[node name="Buy2" type="Button" parent="Pages/upg" unique_id=1198785395]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 221.0
+offset_right = 1240.0
+offset_bottom = 1029.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("5_yo8w2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1247835416]
+
+[node name="CoinsTXT" type="Label" parent="CanvasLayer" unique_id=935672379]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 164.0
+offset_bottom = 78.0
+text = "Coins: 0"
+label_settings = SubResource("LabelSettings_lqsbn")
+script = ExtResource("3_faepb")
+
+[node name="FrenzyTXT" type="Label" parent="CanvasLayer" unique_id=429790422]
+offset_left = 856.0
+offset_top = 8.0
+offset_right = 1280.0
+offset_bottom = 161.0
+text = "1x"
+label_settings = SubResource("LabelSettings_xrhnn")
+script = ExtResource("5_lqsbn")
+
+[node name="Home" type="Button" parent="." unique_id=133473805]
+layout_mode = 0
+offset_left = 24.000008
+offset_top = 533.0
+offset_right = 832.0
+offset_bottom = 1341.0
+scale = Vector2(0.2, 0.2)
+icon = ExtResource("7_cpvns")
+
+[node name="Upg" type="Button" parent="." unique_id=1797598639]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 533.0
+offset_right = 1000.0
+offset_bottom = 1341.0
+scale = Vector2(0.2, 0.2)
+icon = ExtResource("8_npk3y")
