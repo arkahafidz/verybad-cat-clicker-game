@@ -1,4 +1,3 @@
-# globalvar.gd
 extends Node
 
 var coins: int = 0

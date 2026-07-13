@@ -1,10 +1,8 @@
-# ClickableSprite.gd
 extends Sprite2D
 
 @export var wobble_strength : float = 0.5
 @export var wobble_duration : float = 0.4
 
-# Mengambil nilai dasar koin per klik secara dinamis dari cpc globalvar
 var base_coin_per_click : int:
 	get: return globalvar.cpc
 
@@ -23,7 +21,6 @@ var combo_timer : SceneTreeTimer = null
 @onready var frenzy_txt : Label = get_tree().current_scene.get_node_or_null("CanvasLayer/FrenzyTXT")
 
 func _ready() -> void:
-	# Membuat dan mengonfigurasi timer internal untuk memicu fungsi autoclicker setiap detik
 	var auto_timer = Timer.new()
 	auto_timer.wait_time = 1.0
 	auto_timer.autostart = true
@@ -31,7 +28,6 @@ func _ready() -> void:
 	add_child(auto_timer)
 
 func _input(event: InputEvent) -> void:
-	# Memproses input klik kiri mouse hanya jika sprite kucing sedang aktif terlihat di layar
 	if not is_visible_in_tree(): return
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -39,7 +35,6 @@ func _input(event: InputEvent) -> void:
 			trigger_click_effect(event.position)
 
 func trigger_click_effect(click_pos: Vector2) -> void:
-	# Memicu seluruh efek game mulai dari data koin, audio, animasi sprite, hingga UI koin
 	update_combo_multiplier()
 	
 	var total_gain = base_coin_per_click * current_multiplier
@@ -54,26 +49,21 @@ func trigger_click_effect(click_pos: Vector2) -> void:
 	_update_coin_ui()
 	spawn_floating_text(click_pos, total_gain)
 	
-	# Memicu fungsi save data di globalvar setiap kali pemain sukses mengeklik kucing
 	globalvar.save_game()
 
 func _on_autoclick_timeout() -> void:
-	# Menambahkan koin secara pasif berdasarkan status level autoclick saat ini tanpa memengaruhi combo multiplier
 	if "autoclick" in globalvar and globalvar.autoclick > 0:
 		var passive_gain = globalvar.autoclick
 		globalvar.add_coins(passive_gain)
 		
 		_update_coin_ui()
-		# Memunculkan teks melayang tepat di posisi tengah sprite kucing
 		spawn_floating_text(global_position, passive_gain)
 
 func _update_coin_ui() -> void:
-	# Memperbarui tampilan teks koin utama di UI berdasarkan data terbaru
 	if cointxt and "coins" in globalvar:
 		cointxt.text = str(globalvar.coins)
 
 func update_combo_multiplier() -> void:
-	# Mengatur kenaikan multiplier secara eksponensial berdasarkan intensitas klik dan memperbarui UI Frenzy
 	combo_streak += 1
 	
 	if combo_streak >= 25:
@@ -97,12 +87,10 @@ func update_combo_multiplier() -> void:
 	combo_timer.timeout.connect(reset_combo)
 
 func reset_combo() -> void:
-	# Mengembalikan nilai combo streak dan multiplier kembali ke awal (1x) saat pemain berhenti klik
 	combo_streak = 0
 	current_multiplier = 1
 
 func play_click_audio() -> void:
-	# Membuat instansiasi AudioStreamPlayer baru agar suara klik tidak terputus saat di-spam
 	if click_sound:
 		var audio_player = AudioStreamPlayer.new()
 		audio_player.stream = click_sound
@@ -111,7 +99,6 @@ func play_click_audio() -> void:
 		audio_player.finished.connect(audio_player.queue_free)
 
 func spawn_floating_text(pos: Vector2, amount: int) -> void:
-	# Membuat objek label teks angka melayang berdasarkan jumlah pendapatan koin asli
 	var label = Label.new()
 	label.text = "+" + str(amount)
 	
