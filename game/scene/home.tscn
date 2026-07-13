@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cctadf2x8c65" path="res://game/assets/cat.png" id="1_lqsbn"]
 [ext_resource type="Script" uid="uid://cgkc682yne3a4" path="res://game/scripts/controlspage.gd" id="1_npk3y"]
+[ext_resource type="Script" uid="uid://dq0ruhjvksllc" path="res://game/scripts/save.gd" id="1_q0r0g"]
 [ext_resource type="Script" uid="uid://x07ffewo8ufw" path="res://game/scripts/cat.gd" id="2_faepb"]
 [ext_resource type="Script" uid="uid://b2lm0c110stht" path="res://game/scripts/upg.gd" id="3_cpvns"]
 [ext_resource type="Script" uid="uid://h01w5gpvfxpq" path="res://game/scripts/coinstxt.gd" id="3_faepb"]
@@ -30,6 +31,7 @@ offset_top = 19.0
 offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_q0r0g")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=728305795]
 layout_mode = 1
