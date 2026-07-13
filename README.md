@@ -7,3 +7,6 @@ A casual and simple *idle clicker* game. In this game, your main goal is simple:
 
 techstack:
 	gdscript
+	
+how to contribute: 
+	just contribute, or DM me in discord: komandanlynx
