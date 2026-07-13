@@ -24,7 +24,6 @@ globalvar="*uid://b8vl62g1yfcji"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -39,3 +38,4 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
